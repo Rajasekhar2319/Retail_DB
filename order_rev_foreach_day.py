@@ -31,7 +31,7 @@ df1 = spark.read.format("csv").\
         load(src_file_path_name_ot)
 
 
-logging.info("Orders items data read completed")
+logging.info("Orders items data read completed for git sync")
 
 df.createOrReplaceTempView("Orders")
 df1.createOrReplaceTempView("Order_Items")
