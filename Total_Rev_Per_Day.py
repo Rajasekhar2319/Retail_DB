@@ -38,6 +38,6 @@ logging.info("Orders items data read completed pushing to feature branch")
 df.createOrReplaceTempView("Orders")
 df1.createOrReplaceTempView("Order_Items")
 
-df_op = spark.sql("select o.order_date,sum(oi.order_item_subtotal) from Orders o join Order_Items oi on o.order_id = oi.order_item_order_id group by o.order_date")
+df_op = spark.sql("select o.order_date,sum(oi.order_item_subtotal) from Orders o join Order_Items oi on o.order_id = oi.order_item_order_id group by o.order_date where o.order_date between current_date and current_date-1")
 
 df_op.repartition(2).write.format(formatt).save(tgt_file_path_name)
