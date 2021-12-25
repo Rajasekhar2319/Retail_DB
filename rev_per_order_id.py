@@ -35,4 +35,15 @@ logging.info("Order_items data writing completed")
 
 
 
+# Client mode Execution:
+#export SRC_FILE_PATH_NAME=hdfs://m01.itversity.com:9000/user/itv001389/retail_db/orders
+#export TGT_FILE_PATH_NAME=hdfs://m01.itversity.com:9000/user/itv001389/retail_db/Rev_Per_order_id
+#export FORMATT=csv
+#export envv=PROD
+#export SRC_FILE_PATH_NAME_OT=hdfs://m01.itversity.com:9000/user/itv001389/retail_db/order_items
 
+#spark-submit --master yarn /home/itv001389/Retail_DB/rev_per_order_id.py
+
+#Cluster mode Execution:
+
+#/home/itv001389/Retail_DB/rev_per_order_id.py
