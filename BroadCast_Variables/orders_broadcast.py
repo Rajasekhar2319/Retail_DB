@@ -46,3 +46,26 @@ df_op = spark.sql("select o.order_date,o.order_status,sum(oi.order_item_subtotal
 df_op.repartition(2).write.mode("overwrite").format("csv").save(tgt_file_path_name)
 
 logging.info("Data Processing completed")
+
+# Client mode Execution:
+#export SRC_FILE_PATH_NAME=hdfs://m01.itversity.com:9000/user/itv001389/retail_db/orders
+#TGT_FILE_PATH_NAME=hdfs://m01.itversity.com:9000/user/itv001389/retail_db/order_broadcast
+#export FORMATT=csv
+#export envv=PROD
+#export SRC_FILE_PATH_NAME_OT=hdfs://m01.itversity.com:9000/user/itv001389/retail_db/order_items/part-00000
+
+#spark-submit --master yarn /home/itv001389/Retail_DB/BroadCast_Variables/orders_broadcast.pyspark-submit \
+
+
+# Cluster mode Execution:
+
+#spark-submit
+#--master yarn --deploy-mode cluster \
+#--conf "spark.yarn.appMasterEnv.FORMATT=csv" \
+#--conf "spark.yarn.appMasterEnv.envv=PROD" \
+#--conf "spark.yarn.appMasterEnv.SRC_FILE_PATH_NAME=hdfs://m01.itversity.com:9000/user/itv001389/retail_db/orders" \
+#--conf "spark.yarn.appMasterEnv.SRC_FILE_PATH_NAME_OT=hdfs://m01.itversity.com:9000/user/itv001389/retail_db/order_items/part-00000" \
+#--conf "spark.yarn.appMasterEnv.TGT_FILE_PATH_NAME=hdfs://m01.itversity.com:9000/user/itv001389/retail_db/order_broadcast" \
+#/home/itv001389/Retail_DB/BroadCast_Variables/orders_broadcast.pyspark-submit
+
+
