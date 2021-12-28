@@ -13,6 +13,7 @@ envv = os.environ.get('ENVV')
 if envv == 'DEV':
     df = spark.read.option("header","true").csv(src_file_path_name)
 else:
+
     df = spark.read.format("csv").schema("order_id int , order_date timestamp , order_product_id int , order_status string").load(src_file_path_name)
 
 df.createOrReplaceTempView("orders")
