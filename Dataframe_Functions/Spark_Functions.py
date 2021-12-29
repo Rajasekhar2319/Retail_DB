@@ -37,6 +37,7 @@ logging.info("order_items data reading completed")
 logging.info("orders data processing functions started")
 
 df_11 = df.select("order_id","order_date","order_product_id",initcap("order_status").alias("order_status"))
+df_11.show()
 
 df_12 = df_11.withColumn("date",substring("order_date",1,10))
 
@@ -55,7 +56,6 @@ logging.info("Join function started")
 
 df_op = df_15.join(df1_11,df_15.order_id == df1_11.order_item_order_id)
 
-df_op.show()
 logging.info("Join function completed")
 
 
