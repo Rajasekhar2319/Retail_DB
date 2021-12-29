@@ -31,7 +31,7 @@ if envv == 'DEV':
           format("csv").\
           load(src_file_path_name_ot)
 else:
-    df1 = spark.read.orc(src_file_path_name_ot)
+    df1 = spark.read.csv(src_file_path_name_ot)
 logging.info("order_items data reading completed")
 
 logging.info("orders data processing functions started")
@@ -57,3 +57,14 @@ df_op = df_15.join(df1_11,df_15.order_id == df1_11.order_item_order_id)
 
 df_op.show()
 logging.info("Join function completed")
+
+
+# Client mode Execution:
+#export SRC_FILE_PATH_NAME=hdfs://m01.itversity.com:9000/user/itv001389/retail_db/orders
+#export TGT_FILE_PATH_NAME=hdfs://m01.itversity.com:9000/user/itv001389/retail_db/Dataframe_Functions
+#export FORMATT=csv
+#export envv=PROD
+#export SRC_FILE_PATH_NAME_OT=hdfs://m01.itversity.com:9000/user/itv001389/retail_db/order_items
+
+#spark-submit --master yarn /home/itv001389/Retail_DB/Dataframe_Functions/Spark_Functions.py
+
