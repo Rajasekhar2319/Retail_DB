@@ -20,7 +20,7 @@ logging.info("orders data reading started")
 if envv == 'DEV':
     df = spark.read.option("header","true").csv(src_file_path_name)
 else:
-    df = spark.read.schema("order_id int,order_date timestamp,order_product_id int,order_status string").format("csv").load(src_file_path_name)
+    df = spark.read.orc(src_file_path_name)
 logging.info("orders data reading completed")
 
 logging.info("order_items data reading started")
@@ -37,7 +37,6 @@ logging.info("order_items data reading completed")
 logging.info("orders data processing functions started")
 
 df_11 = df.select("order_id","order_date","order_product_id",initcap("order_status").alias("order_status"))
-df_11.show()
 
 df_12 = df_11.withColumn("date",substring("order_date",1,10))
 
@@ -58,6 +57,7 @@ df_op = df_15.join(df1_11,df_15.order_id == df1_11.order_item_order_id)
 
 logging.info("Join function completed")
 
+df_op.show()
 
 # Client mode Execution:
 #export SRC_FILE_PATH_NAME=hdfs://m01.itversity.com:9000/user/itv001389/retail_db/Pycharm_Targets_Processing_Orders
