@@ -57,7 +57,7 @@ df_op = df_15.join(df1_11,df_15.order_id == df1_11.order_item_order_id)
 
 logging.info("Join function completed")
 
-df_op.show()
+df_op.write.mode("overwrite").format("csv").save(tgt_file_path_name)
 
 #df_op.show()
 
